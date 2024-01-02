@@ -1,0 +1,54 @@
+Q- What is `NPM`?
+A- NPM is the collection of packages. It manages the packages.
+
+Q- What is `Parcel/Webpack`? Why do we need it?
+A- Parcel/Webpack is bundler which is used to make dev/production ready build. It is used to optimize the 
+   application,minification the code,code bunling,image optimization.
+
+Q- What is `.parcel-cache`
+A- parcel cache is used to cache the code so it makes application more fast.
+
+Q- What is `npx` ?
+A- npx is used for execution of the packages.
+
+Q- What is difference between `dependencies` vs `devDependencies`
+A- normal dependencies are which is required by the application even when in production while devDependencies are
+   dependencies which are required only at the time of devlopment.
+
+Q- What is Tree Shaking?
+A- Tree Shaking means removal of unused code or dead code.
+
+Q- What is Hot Module Replacement?
+A- HMR is a powerfull technique to update the module while in devlopment.
+
+Q- List down your favourite 5 superpowers of Parcel and describe any 3 of them in your own words.
+A- 1) bundler
+   2) minification the code
+   3) image optimization
+   4) Tree Shaking
+   5) creates server for you.
+   6) compression
+
+   -  minification the code -> It reduces the code size and do compression. Also perform code spliting.
+   -  Tree Shaking -> It removes dead code from the build
+   -  creates server for you -> It creates server for you and run the application.
+
+Q- What is `.gitignore`? What should we add and not add into it?
+A- .gitignore is a file which is used to tell the git what to not put in the git hub. We should only put the source 
+    code of the application and not the code which can be regenrated.
+
+Q- What is the difference between `package.json` and `package-lock.json`
+A- package.json stores the actual version of the package used in the application while package-lock.json stores all the version used and depenccy of other pacakes along with its version.
+
+Q- Why should I not modify `package-lock.json`?
+A- Because it stores the history of all pacakes and dependencies of the pacakes as well.
+
+Q- What is `node_modules` ? Is it a good idea to push that on git?
+A- node_modules contains the exact code for all the pacakes installed in application. No its not good idea to push 
+   it in git because it can be re-genarted.
+
+Q- What is the `dist` folder?
+A- dist folder is the optimized code which is used by application to run.
+
+Q- What is `browserlists`
+A- browserlists is the package which is used to configure to run the application on older browsers as well.

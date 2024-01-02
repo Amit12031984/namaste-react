@@ -2,7 +2,6 @@
   "name": "namastereact",
   "version": "1.0.0",
   "description": "namaste react",
-  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
@@ -10,6 +9,16 @@
   "license": "ISC",
   "dependencies": {
     "-": "^0.0.1",
-    "D": "^1.0.0"
-  }
+    "D": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.3",
+    "process": "^0.11.10"
+  },
+  "browserslist" : [
+    "last 5 chrome versions",
+    " last 5 Edge versions"
+  ]
 }
