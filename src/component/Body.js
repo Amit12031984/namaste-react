@@ -1,6 +1,7 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withRestaurantCardLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
@@ -9,7 +10,7 @@ const Body = () => {
 
   const handleTopRes = () => {
     const filteredRes = resData.filter((res) => {
-      return res?.card?.card?.info?.avgRating > 4.2;
+      return res?.info?.avgRating > 4.2;
     });
     setFilteredResData(filteredRes);
   };
@@ -20,41 +21,37 @@ const Body = () => {
 
   const handleSearchClick = () => {
     const filteredRes = resData.filter((res) => {
-      return res.card.card.info.name
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return res?.info?.name.toLowerCase().includes(searchText.toLowerCase());
     });
     setFilteredResData(filteredRes);
   };
 
   useEffect(() => {
     fetchData();
-    console.log(resData);
   }, []);
+
+  const RestaurantCardLabel = withRestaurantCardLabel(RestaurantCard);
 
   const fetchData = async () => {
     let data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.86345081202028&lng=81.02116920053959&collection=88750&tags=layout_ux4&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.60658&lng=73.784073&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     let jsonData = await data.json();
     setResData(
-      jsonData.data.cards.filter((res, index) => {
-        return index > 1;
-      })
+      jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
     setFilteredResData(
-      jsonData.data.cards.filter((res, index) => {
-        return index > 1;
-      })
+      jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
   };
 
   return resData.length === 0 ? (
     <ShimmerUI />
   ) : (
-    <div className="body">
-      <div className="search">
+    <div className="mx-4">
+      <div className="my-3">
         <input
+          className="border border-solid border-black rounded-lg text-center"
           type="text"
           placeholder="Search"
           value={searchText}
@@ -64,6 +61,7 @@ const Body = () => {
           }}
         />
         <button
+          className="ml-4 bg-green-100 rounded-lg px-4 py-1"
           onClick={() => {
             handleSearchClick();
           }}
@@ -71,7 +69,7 @@ const Body = () => {
           Search
         </button>
         <button
-          className="btn-topRes"
+          className="ml-4 bg-green-100 rounded-lg px-4 py-1"
           onClick={() => {
             handleTopRes();
           }}
@@ -79,10 +77,20 @@ const Body = () => {
           Top Rated Restaurant
         </button>
       </div>
-      <div className="restau-container">
-        {filteredResData.map((resObj) => {
+      <div className="grid grid-cols-5">
+        {filteredResData.map((resObj, index) => {
           return (
-            <RestaurantCard key={resObj?.card?.card?.info?.id} data={resObj} />
+            <Link
+              className="res-text"
+              key={resObj.info.id}
+              to={`/restaurants/${resObj.info.id}`}
+            >
+              {resObj.info.isOpen ? (
+                <RestaurantCardLabel data={resObj} />
+              ) : (
+                <RestaurantCard data={resObj} />
+              )}
+            </Link>
           );
         })}
       </div>
