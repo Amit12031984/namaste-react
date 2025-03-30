@@ -12,6 +12,7 @@ const RestaurantMenu = () => {
       `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.86345081202028&lng=81.02116920053959&restaurantId=${resId}`
     );
     const ResMenu = await data.json();
+    console.log(ResMenu.data.cards);
     setResMenuData(ResMenu.data.cards);
   };
 
@@ -25,7 +26,7 @@ const RestaurantMenu = () => {
   }
 
   const categoryList =
-    resMenuData[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resMenuData[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (category, index) => {
         return (
           category?.card?.card["@type"] ===

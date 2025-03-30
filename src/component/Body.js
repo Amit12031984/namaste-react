@@ -37,6 +37,9 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.60658&lng=73.784073&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     let jsonData = await data.json();
+    console.log(
+      jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    );
     setResData(
       jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
@@ -51,6 +54,7 @@ const Body = () => {
     <div className="mx-4">
       <div className="my-3">
         <input
+          data-testid="searchInput"
           className="border border-solid border-black rounded-lg text-center"
           type="text"
           placeholder="Search"
@@ -61,6 +65,7 @@ const Body = () => {
           }}
         />
         <button
+          data-testid="searchBtn"
           className="ml-4 bg-green-100 rounded-lg px-4 py-1"
           onClick={() => {
             handleSearchClick();

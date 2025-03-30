@@ -6,15 +6,23 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loginText, setLoginText] = useState("Login");
+  const [cityMenu, setCityMenu] = useState("hidden");
 
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   const login = () => {
     loginText === "Login" ? setLoginText("Logout") : setLoginText("Login");
   };
 
   const userData = useContext(UserContext);
+
+  const handleCityClick = () => {
+    cityMenu === "hidden" ? setCityMenu("block") : setCityMenu("hidden");
+  };
+
+  const handleCityMenuClick = () => {
+    setCityMenu("hidden");
+  };
 
   return (
     <div className="flex justify-between bg-gray-100">
@@ -39,7 +47,7 @@ const Header = () => {
             <Link to="/cart">Cart({cartItems.length} items)</Link>
           </li>
           <button
-            className="px-4"
+            className="px-4 h-5"
             onClick={() => {
               login();
             }}
@@ -48,6 +56,19 @@ const Header = () => {
           </button>
           <li className="px-4">
             <span>{userData.loggedInUser}</span>
+          </li>
+          <li className="px-4">
+            <span className="font-bold" onClick={handleCityClick}>
+              City
+            </span>
+            <ul className={cityMenu}>
+              <li onClick={handleCityMenuClick}>
+                <Link to="/lucknow">Lucknow</Link>
+              </li>
+              <li onClick={handleCityMenuClick}>
+                <Link to="/pune">Pune</Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

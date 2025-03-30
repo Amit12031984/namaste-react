@@ -6,4 +6,4 @@
         "@parcel/transformer-react-refresh-wrap"
       ]
     }
-  }
+}

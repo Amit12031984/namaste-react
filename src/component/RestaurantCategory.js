@@ -3,9 +3,11 @@ import RestaurantItemList from "./RestaurantItemList";
 
 const RestaurantCategory = ({ data }) => {
   const [showIndex, setShowIndex] = useState(0);
+  const [showItems, setShowItems] = useState(false);
 
   const handleClick = (index) => {
     setShowIndex(index);
+    setShowItems(!showItems);
   };
 
   return (
@@ -25,7 +27,7 @@ const RestaurantCategory = ({ data }) => {
                 <div>🔽</div>
               </div>
               <div>
-                {index === showIndex && (
+                {index === showIndex && showItems && (
                   <RestaurantItemList items={category?.card?.card?.itemCards} />
                 )}
               </div>
